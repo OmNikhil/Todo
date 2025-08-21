@@ -1,1 +1,40 @@
-<p>Hello Angular</p>
+<div class="todo-container">
+  <h1 class="title"> To-Do List </h1>
+
+  <form (submit)="onSubmit()" class="todo-form">
+    <input
+      type="text"
+      [(ngModel)]="newTodo"
+      name="todo"
+      placeholder="Enter task..."
+      required
+    />
+    <button type="submit">{{ isEdit ? 'Update' : 'Add' }}</button>
+  </form>
+
+  <ul class="todo-list">
+    @for (todo of todos; track $index) {
+      <li >
+        <!-- <input
+          type="checkbox"
+          [checked]="todo.done"
+          (change)="onCheckboxChange(todo.id, $index)"
+        /> -->
+        <span>
+          {{ todo.task }}
+        </span>
+
+        <div class="actions">
+          <button class="edit" (click)="editTodo(todo.id)">Edit</button>
+          <button class="delete" (click)="deleteTodo(todo.id)">Delete</button>
+        </div>
+    </li>
+    }
+
+  </ul>
+
+  <div class="bottom-actions">
+    <button class="danger" (click)="deleteAll()">Delete All</button>
+    <button class="exit" (click)="exitApp()">Exit</button>
+  </div>
+</div>
